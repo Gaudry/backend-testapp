@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
 
   test-app:
@@ -36,7 +34,7 @@ services:
       - "5432:5432"
 
     volumes:
-      - test-app-postgres:/var/lib/postgresql/data
+      - test_app_postgres_data:/var/lib/postgresql/data
 
     networks:
       - test-app-back-dev
