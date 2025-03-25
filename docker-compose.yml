@@ -1,0 +1,59 @@
+version: "3.8"
+
+services:
+
+  test-app:
+    build: .
+    container_name: test_app_backend
+    restart: always
+    command: ["sh", "start.sh"]
+
+    env_file:
+      - .env
+
+    ports:
+      - "20001:1234"
+
+    volumes:
+      - "./app:/app"
+
+    networks:
+      - test-app-back-dev
+      - test-app-postgres
+
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  test-app-postgres:
+    image: postgres:alpine3.19
+    container_name: postgres-container
+    restart: always
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - test-app-postgres:/var/lib/postgresql/data
+
+    networks:
+      - test-app-back-dev
+      - test-app-postgres
+
+    environment:
+      POSTGRES_DB: ${SQL_NAME}
+      POSTGRES_USER: ${SQL_USER}
+      POSTGRES_PASSWORD: ${SQL_PASSWORD}
+
+volumes:
+  test_app_postgres_data:
+    driver: local
+
+networks:
+  test-app-back-dev:
+    driver: bridge
+
+  test-app-postgres:
+    driver: bridge
