@@ -1,5 +1,5 @@
 README.md
 app/env
 app/mytestproject/venv
-app/mytestproject/.env
+#app/mytestproject/.env
 app/mytestproject/mytestapp/migrations/0001_initial.py
