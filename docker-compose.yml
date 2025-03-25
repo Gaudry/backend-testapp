@@ -16,10 +16,6 @@ services:
     volumes:
       - "./app:/app"
 
-    networks:
-      - test-app-back-dev
-      - test-app-postgres
-
     logging:
       driver: "json-file"
       options:
@@ -38,10 +34,6 @@ services:
     volumes:
       - test_app_postgres_data:/var/lib/postgresql/data
 
-    networks:
-      - test-app-back-dev
-      - test-app-postgres
-
     environment:
       POSTGRES_DB: ${SQL_NAME}
       POSTGRES_USER: ${SQL_USER}
@@ -50,10 +42,3 @@ services:
 volumes:
   test_app_postgres_data:
     driver: local
-
-networks:
-  test-app-back-dev:
-    driver: bridge
-
-  test-app-postgres:
-    driver: bridge
