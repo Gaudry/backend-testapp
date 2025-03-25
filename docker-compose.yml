@@ -29,6 +29,7 @@ services:
   test-app-postgres:
     image: postgres:alpine3.19
     container_name: postgres-container
+    network_mode: host  # This binds the container to the host network
     restart: always
 
     ports:
