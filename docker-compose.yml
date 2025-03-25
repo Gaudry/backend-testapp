@@ -3,6 +3,7 @@ services:
   test-app:
     build: .
     container_name: test_app_backend
+    network_mode: host  # This binds the container to the host network
     restart: always
     command: ["sh", "start.sh"]
 
